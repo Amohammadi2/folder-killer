@@ -6,28 +6,31 @@ import os
 from os.path import isdir
 
 def delete_empty_folders(folder):
+	number_of_deleted_folders = 0
 	os.chdir(folder)
 	if not (files:=os.listdir()):
 		os.chdir("..")
 		os.system("rmdir " + folder)
-		return
+		return number_of_deleted_folders + 1
 	for file in files:
 		if isdir(file):
-			delete_empty_folders(file); continue
-	os.chdir("..") # get back to the parent
+			number_of_deleted_folders += delete_empty_folders(file)
+			continue
+	os.chdir("..") # get back to the parent directory
+	return number_of_deleted_folders
 
 def main():
 	parser = argparse.ArgumentParser(description="deletes empty folders")
 	parser.add_argument("folder")
 	args = parser.parse_args()
 	try:
-		delete_empty_folders(args.folder)
+		deleted_folders = delete_empty_folders(args.folder)
 	except Exception as e:
 		print ("an error occured when deleting the folder")
 		print (e)
 		exit()
 	else:
-		print ("empty folders deleted")
+		print (f"{deleted_folders} empty folders deleted")
 
 
 if __name__ == "__main__":
