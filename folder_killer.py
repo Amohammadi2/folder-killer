@@ -1,5 +1,10 @@
 # Author: Ashkan Mohammadi
 # Email: mohammadiashkan1384@gmail.com
+# usage: python folder_killer.py <folder_name>
+#                                -------------
+#                                ^ replace it
+#
+# example: python folder_killer.py testing_folder
 
 import argparse
 import os
