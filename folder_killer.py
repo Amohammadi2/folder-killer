@@ -9,6 +9,7 @@
 import argparse
 import os
 from os.path import isdir
+from logger import Logger
 
 def delete_empty_folders(folder):
 	number_of_deleted_folders = 0
@@ -31,15 +32,14 @@ def main():
 	try:
 		deleted_folders = delete_empty_folders(args.folder)
 	except Exception as e:
-		print ("an error occured when deleting the folder")
-		print (e)
-		exit()
+		Logger().error(e) # log the error
+		print ("there was an error while deleting empty folders")
 	else:
 		outputs = [
 			"{} empty folder deleted",
 			"{} empty folders deleted",
 		]
-		print (outputs[min(1, deleted_folders)+1].format(deleted_folders))
+		print (outputs[min(1, deleted_folders-1)].format(deleted_folders))
 
 
 if __name__ == "__main__":
