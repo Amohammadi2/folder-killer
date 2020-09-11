@@ -38,6 +38,8 @@ def main():
 	except Exception as e:
 		Logger().error(e) # log the error
 		print ("there was an error while deleting empty folders")
+		if {"y": True, "n": False}[input ("want to check the log: " + os.getcwd() + "\\log.txt? (y,n): ")[0].lower()]:
+			os.system("notepad log.txt" if os.name == "nt" else "nano log.txt")
 	else:
 		outputs = [
 			"{} empty folder deleted",
