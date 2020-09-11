@@ -34,7 +34,7 @@ def main():
 			"{} empty folder deleted",
 			"{} empty folders deleted",
 		]
-		print (outputs[min(1, deleted_folders)+1].format(deleted_folders))
+		print (outputs[min(1, deleted_folders-1)].format(deleted_folders))
 
 
 if __name__ == "__main__":
