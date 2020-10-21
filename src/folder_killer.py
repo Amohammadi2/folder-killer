@@ -53,13 +53,13 @@ class Program:
 		number_of_deleted_folders = 0
 		deleted_folders:list = []
 		current_dir = os.path.join(current_dir, folder)
+		print (current_dir)
 		if not (files:=os.listdir(current_dir)):
 			os.rmdir(current_dir)
 			results =  [number_of_deleted_folders + 1, [current_dir]]
 			current_dir, _ = os.path.split(current_dir)
 			return results
 		event_emitter.emit("files-listed", files, current_dir)
-		print (id(event_emitter))
 		for file in files:
 			if isdir(os.path.join(current_dir, file)):
 				subprocess_result = self.delete_empty_folders_exp(file, current_dir)
@@ -74,6 +74,7 @@ class Program:
 	def getArguments(self):
 		parser = argparse.ArgumentParser(description="deletes empty folders")
 		parser.add_argument("folder")
+		event_emitter.emit("argument-parser-ready", parser)
 		args = parser.parse_args()
 		event_emitter.emit("arguments-parsed", args)
 		return args
