@@ -1,0 +1,6 @@
+folder_killer.py
+setup.py
+FolerKiller.egg-info/PKG-INFO
+FolerKiller.egg-info/SOURCES.txt
+FolerKiller.egg-info/dependency_links.txt
+FolerKiller.egg-info/top_level.txt
