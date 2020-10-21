@@ -49,24 +49,6 @@ class Program:
 			plugin_instance.loadPlugin()
 			self.plugins_to_unload.append(plugin_instance)
 
-	def delete_empty_folders(self, folder):
-		number_of_deleted_folders = 0
-		os.chdir(folder)
-		path = os.getcwd()
-		deleted_folders: list = []
-		if not (files:=os.listdir()):
-			os.chdir("..")
-			os.system("rmdir " + folder)
-			return [number_of_deleted_folders + 1, [path]]
-		for file in files:
-			if isdir(file):
-				results = delete_empty_folders(file)
-				number_of_deleted_folders += results[0]
-				deleted_folders += results[1]
-				continue
-		os.chdir("..") # get back to the parent directory
-		return [number_of_deleted_folders, deleted_folders]
-
 	def delete_empty_folders_exp(self, folder, current_dir):
 		number_of_deleted_folders = 0
 		deleted_folders:list = []
@@ -82,9 +64,10 @@ class Program:
 			if isdir(os.path.join(current_dir, file)):
 				subprocess_result = self.delete_empty_folders_exp(file, current_dir)
 		if not os.listdir(current_dir):
-			deleted_folders += current_dir
+			deleted_folders += [current_dir]
 			number_of_deleted_folders += 1
 			current_dir, _ = os.path.split(current_dir)
+			os.rmdir(current_dir)
 		return [number_of_deleted_folders, deleted_folders]
 
 
