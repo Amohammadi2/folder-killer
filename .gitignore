@@ -1,5 +1,5 @@
 FolerKiller.egg-info/**
 **/__pycache__/**
-log.txt
+**/log.txt/**
 build/**
 diest/**
