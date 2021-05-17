@@ -1,0 +1,2 @@
+[ERROR] [WinError 2] The system cannot find the file specified: 'images'
+[ERROR] delete_empty_folders_exp() missing 1 required positional argument: 'current_dir'
